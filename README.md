@@ -35,13 +35,13 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     WHERE
         MOVIE_ID = 103;
     ```
-1. find movies rating > 8.7
+1. display movies rating > 8.7
     ```
     SELECT * FROM movies
     WHERE
 	    IMDB_RATINGS > 8.7;
     ```
-1. find movies rating between 5 and 8.7
+1. display movies rating between 5 and 8.7
     ```
     SELECT * FROM movies
     WHERE
@@ -53,7 +53,7 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     WHERE
         IMDB_RATINGS BETWEEN 5 AND 8.7;
     ```
-1. find Action movies
+1. display Action movies
     ```
     SELECT * FROM movies
     WHERE
@@ -63,7 +63,7 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     ```
     SELECT movie_genre FROM movies;
     ```
-1. find movies with rating 8.6, 8.5, 9. 
+1. display movies with rating 8.6, 8.5, 9. 
     ```
     SELECT * FROM movies
     WHERE 
@@ -106,4 +106,37 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
         FROM 'C:\Temp\employees_import.csv'
         WITH (FORMAT csv, HEADER, DELIMITER ',');
         ```
-1. 
+1. display unique addresses:
+    ```
+    SELECT DISTINCT address FROM employees;
+    ```
+1. display rows where some field is null:
+    ```
+    SELECT * FROM employees
+    WHERE email is NULL;
+    ```
+1. display all sorted by salary from small to large
+    ```
+    SELECT * FROM employees
+    ORDER BY salary ASC;
+    ```
+1. display all sorted by salary from large to small
+    ```
+    SELECT * FROM employees
+    ORDER BY salary DESC;
+    ```
+1. rename column name address to country
+    ```
+    ALTER TABLE employees
+    RENAME column address TO country;
+    ```
+1. display only 5 rows and skip first 2
+    ```
+    SELECT * FROM employees
+    LIMIT 5 OFFSET 2;
+    ```
+1. display employees where name have second letter 'o'
+    ```
+    SELECT * FROM employees
+    WHERE emp_name LIKE '_o%';
+    ```

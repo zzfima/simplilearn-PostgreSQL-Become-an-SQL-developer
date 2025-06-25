@@ -111,7 +111,7 @@ VALUES
 (24, 'Cort Lansly', 'clanslyn@', 'Female', 'Sales', 'Russia', 63138.92);
 
 
-SELECT * FROM employees;
+SELECT address FROM employees;
 
 
 COPY employees(emp_id, emp_name, email, gender, department, address, salary)
@@ -119,3 +119,28 @@ FROM 'C:\Temp\employees_import.csv'
 WITH (FORMAT csv, HEADER, DELIMITER ',');
 
 
+SELECT DISTINCT address FROM employees;
+
+
+SELECT * FROM employees
+WHERE email is NULL;
+
+
+SELECT * FROM employees
+ORDER BY salary ASC;
+
+
+SELECT * FROM employees
+ORDER BY salary DESC;
+
+
+ALTER TABLE employees
+RENAME column address TO country;
+
+
+SELECT * FROM employees
+LIMIT 5 OFFSET 2;
+
+
+SELECT * FROM employees
+WHERE emp_name LIKE '_o%';
