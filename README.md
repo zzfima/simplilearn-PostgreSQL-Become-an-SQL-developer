@@ -212,7 +212,7 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     ```
 1. show countries where average salary > 50000 (dont display Germany)
 
-    using double select 
+    using __nested query__
     ```
     SELECT * FROM
         (SELECT country, avg(salary) as avg_salary
@@ -250,4 +250,49 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     END AS salary_grade
     FROM employees;
     ```
-1. 
+1. find emloyee name, department of emoloyes their salary above average using __nested query__
+    ```
+    SELECT emp_name, department, country, salary
+    FROM employees
+    WHERE salary > (SELECT avg(salary) FROM employees);
+    ```
+
+1. math functions
+    ```
+    SELECT ABS(-100);
+    SELECT GREATEST(1, 6, 88, 4, 5);
+    SELECT LEAST(1, 6, 88, 4, 5);
+    SELECT MOD(54, 10);
+    SELECT POWER(2, 3);
+    SELECT SQRT(9);
+    SELECT CEIL(9.5);
+    SELECT FLOOR(9.5);
+    ```
+1. string functions
+    ```
+    SELECT CHAR_LENGTH('HELLO WORLD');
+    SELECT CONCAT('HELLO ', 'WORLD', '!');
+    SELECT LEFT('HELLO WORLD !!!', 3);
+    SELECT RIGHT('HELLO WORLD !!!', 3);
+    SELECT REPEAT('HELLO WORLD !!!', 3);
+    SELECT REVERSE('HELLO WORLD !!!');
+    ```
+1. count emails using __user defined functons__
+
+    creating user definded function for count emails
+    ```
+    CREATE OR REPLACE FUNCTION count_emails()
+    RETURNS integer AS $total_emails$
+    DECLARE
+        total_emails integer;
+    BEGIN
+        SELECT COUNT(email) INTO total_emails
+        FROM employees;
+        RETURN total_emails;
+    END;
+    $total_emails$ LANGUAGE plpgsql;
+    ```
+    using function
+    ```
+    SELECT count_emails();
+    ```
