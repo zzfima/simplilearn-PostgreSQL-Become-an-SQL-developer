@@ -161,6 +161,16 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     ALTER TABLE employees
     RENAME column address TO country;
     ```
+1. add column
+    ```
+    ALTER TABLE employees
+    ADD Heigth REAL;
+    ```
+1. change column type
+    ```
+    ALTER TABLE employees
+    ALTER column Heigth TYPE integer;
+    ```
 1. display only 5 rows and skip first 2
     ```
     SELECT * FROM employees

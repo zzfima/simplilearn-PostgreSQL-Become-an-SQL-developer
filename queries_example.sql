@@ -238,3 +238,11 @@ END;
 $total_emails$ LANGUAGE plpgsql;
 
 SELECT count_emails();
+
+
+ALTER TABLE employees
+ADD Heigth REAL;
+
+
+ALTER TABLE employees
+ALTER column Heigth TYPE integer;
