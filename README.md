@@ -48,7 +48,9 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     ```
 1. remove rows
     ```
-    DELETE FROM movies WHERE movie_id = 1;
+    DELETE FROM movies 
+    WHERE 
+        movie_id = 1;
     ```
 1. describe table (sql shell)
     ```
@@ -165,6 +167,11 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     ```
     ALTER TABLE employees
     ADD Heigth REAL;
+    ```
+1. remove column
+    ```
+    ALTER TABLE employees
+    DROP column Heigth;
     ```
 1. change column type
     ```

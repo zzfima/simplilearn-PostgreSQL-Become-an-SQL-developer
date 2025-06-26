@@ -244,5 +244,14 @@ ALTER TABLE employees
 ADD Heigth REAL;
 
 
+select * from employees limit 5;
+
 ALTER TABLE employees
-ALTER column Heigth TYPE integer;
+DROP column Heigth;
+
+update employees
+set heigth = 45.45
+where heigth = 45;
+
+DELETE FROM employees
+WHERE emp_name LIKE '_i%';
