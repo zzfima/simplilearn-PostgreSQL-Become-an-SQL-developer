@@ -144,3 +144,60 @@ LIMIT 5 OFFSET 2;
 
 SELECT * FROM employees
 WHERE emp_name LIKE '_o%';
+
+
+SELECT SUM(salary) AS total_salary FROM employees;
+
+
+SELECT MAX(salary) AS max_salary FROM employees;
+
+
+SELECT COUNT(DISTINCT department) AS max_salary FROM employees;
+
+
+UPDATE employees
+SET department = 'Analytics'
+WHERE department IS NULL;
+
+
+SELECT AVG(salary) as average_salary, country FROM employees
+GROUP BY country ORDER BY average_salary DESC;
+
+
+SELECT COUNT(emp_name) AS employees_count, country
+FROM employees
+GROUP BY country;
+
+
+SELECT * FROM
+	(SELECT country, avg(salary) as avg_salary
+	FROM employees
+	GROUP BY country)
+WHERE avg_salary > 50000;
+
+
+SELECT country, avg(salary) as avg_salary
+FROM employees
+GROUP BY country 
+HAVING avg(salary) > 50000;
+
+
+SELECT count(emp_name) emp_amount, country
+FROM employees
+GROUP BY country
+HAVING count(emp_name) < 10
+ORDER BY emp_amount;
+
+
+SELECT department, country, salary,
+CASE
+	WHEN salary < 45000 
+		THEN 'Very low salary'
+	WHEN salary BETWEEN 45000 AND 55000
+		THEN 'Low salary'
+	WHEN salary BETWEEN 55000 AND 80000
+		THEN 'Medium salary'
+	WHEN salary > 80000
+		THEN 'High salary'
+END AS salary_grade
+FROM employees;

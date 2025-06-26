@@ -4,13 +4,34 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
 
 ## sql commands
 1. ![alt text](image.png)
-1. show version `select version();`
-1. show all databases (sql shell): `\l`
-1. create db: `create database sql_demo;`
-1. connect to db: `\c sql_demo;`
-1. create table `CREATE TABLE movies(movie_id int, movie_name varchar(40), movie_genre varchar(30), imdb_ratings real);`
-1. delete table `DROP TABLE movies;`
-1. show all: `SELECT * FROM movies;`
+1. show version
+    ```
+    SELECT VERSION();
+    ```
+1. show all databases (sql shell):
+    ``` 
+    \l
+    ```
+1. create db
+    ```
+    CREATE DATABASE sql_demo;
+    ```
+1. connect to db (sql shell)
+    ```
+    \c sql_demo
+    ```
+1. create table
+    ```
+    CREATE TABLE movies(movie_id int, movie_name varchar(40), movie_genre varchar(30), imdb_ratings real);
+    ```
+1. delete table
+    ```
+    DROP TABLE movies;
+    ```
+1. show all
+    ```
+    SELECT * FROM movies;
+    ```
 1. insert data: 
     ```
     INSERT INTO 
@@ -25,8 +46,14 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
         (107, 'Interstellar', 'Adventure', 8.6),
         (108, 'The Lion King', 'Animation, Adventure', 8.5);
     ```
-1. remove rows `DELETE FROM movies WHERE movie_id = 1;`
-1. describe table (sql shell): `\d movies`
+1. remove rows
+    ```
+    DELETE FROM movies WHERE movie_id = 1;
+    ```
+1. describe table (sql shell)
+    ```
+    \d movies
+    ```
 1. update rows
     ```
     UPDATE MOVIES
@@ -64,6 +91,8 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     SELECT movie_genre FROM movies;
     ```
 1. display movies with rating 8.6, 8.5, 9. 
+    
+    *8.59 AND 8.61 becouse of float*
     ```
     SELECT * FROM movies
     WHERE 
@@ -89,7 +118,9 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     );
     ```
 1. Import csv employees_import.csv file into employees db.
-    1. csv file in next format
+        
+    csv file in next format
+
         ```
         EMP_ID,EMP_NAME,EMAIL,GENDER,DEPARTMENT,ADDRESS,SALARY
         1,Briant Grantham,bgrantham@,Male,Business Development,Russia,86598.38
@@ -140,3 +171,83 @@ from: https://www.simplilearn.com/free-postgresql-course-skillup?tag=postgresql
     SELECT * FROM employees
     WHERE emp_name LIKE '_o%';
     ```
+1. display sum of salaries under alias total_salary
+    ```
+    SELECT SUM(salary) AS total_salary FROM employees;
+    ```
+1. display max salary under alias max_salary
+    ```
+    SELECT MAX(salary) AS max_salary FROM employees;
+    ```
+1. display number of departments
+    ```
+    SELECT COUNT(DISTINCT department) AS deps_cnt FROM employees;
+    ```
+1. set department name Analytics if it was null
+    ```
+    UPDATE employees
+    SET department = 'Analytics'
+    WHERE department IS NULL;
+    ```
+1. find average salary of employees in each country
+    ```
+    SELECT AVG(salary) as average_salary, country FROM employees
+    GROUP BY country ORDER BY average_salary DESC;
+    ```
+1. find the max, min and average salary per sex
+    ```
+    SELECT
+        MIN(SALARY) AS MIN_SALARY, 
+        MAX(SALARY) AS MAX_SALARY,
+        AVG(SALARY) AS AVG_SALARY,
+        gender
+    FROM EMPLOYEES
+    GROUP BY GENDER;
+    ```
+1. count amount of employees per country
+    ```
+    SELECT COUNT(emp_name) AS employees_count, country
+    FROM employees
+    GROUP BY country;
+    ```
+1. show countries where average salary > 50000 (dont display Germany)
+
+    using double select 
+    ```
+    SELECT * FROM
+        (SELECT country, avg(salary) as avg_salary
+        FROM employees
+        GROUP BY country)
+    WHERE avg_salary > 50000;
+    ```
+    or using __having__ id much shorter
+    ```
+    SELECT country, avg(salary) as avg_salary
+    FROM employees
+    GROUP BY country 
+    HAVING avg(salary) > 50000;
+    ```
+1. find count of employees per each country where is less than 10 employees (Russia will not be displayed)
+    ```
+    SELECT count(emp_name) emp_amount, country
+    FROM employees
+    GROUP BY country
+    HAVING count(emp_name) < 10
+    ORDER BY emp_amount;
+    ```
+1. create new column which will show salary rate of employee: low, med or high using __case__
+    ```
+    SELECT department, country, salary,
+    CASE
+        WHEN salary < 45000 
+            THEN 'Very low salary'
+        WHEN salary BETWEEN 45000 AND 55000
+            THEN 'Low salary'
+        WHEN salary BETWEEN 55000 AND 80000
+            THEN 'Medium salary'
+        WHEN salary > 80000
+            THEN 'High salary'
+    END AS salary_grade
+    FROM employees;
+    ```
+1. 
